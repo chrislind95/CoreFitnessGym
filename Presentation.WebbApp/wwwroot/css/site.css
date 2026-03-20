@@ -421,3 +421,38 @@ form {
         grid-area: submit;
     }
 }
+
+header {
+    display: flex;
+    align-items: center;
+    background-color: var(--section-accent-background-color);
+    color: var(--text-accent-color);
+    border-radius: 20px;
+    padding: 1rem 2rem 1rem;
+    min-height: 80px;
+    /* header section */
+    .header-section {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 2fr 3fr 2fr;
+        align-items: center;
+
+        .logotype {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .main-menu {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .account-menu {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+    }
+}

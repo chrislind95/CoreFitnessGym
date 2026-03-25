@@ -20,6 +20,7 @@
     --heading-accent-color: var(--white-color);
     --text-color: var(--dark-color);
     --text-accent-color: var(--white-color);
+    --section-title-text-color: var(--white-color);
     --border-color: var(--gray-color);
     --border-accent-color: var(--theme-color);
     --link-color: var(--dark-color);

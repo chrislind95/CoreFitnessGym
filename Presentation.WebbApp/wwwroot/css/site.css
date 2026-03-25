@@ -645,3 +645,49 @@ header {
         }
     }
 }
+
+/* brands section */
+.section__brands {
+    background-color: var(--brands-background-color);
+    display: none;
+    grid-template-columns: 1fr 2fr;
+    align-items: center;
+    padding: 1rem 2rem;
+    border-radius: 20px;
+    margin: 1.5rem 0;
+
+    @media (width >= 992px) {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+    }
+
+    @media (width >= 1600px) {
+        grid-template-columns: 3fr 2fr;
+    }
+
+    .brand-slider {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+
+        @media (width >= 1200px) {
+            grid-template-columns: repeat(5, 1fr);
+        }
+
+        #brand-3,
+        #brand-4,
+        #brand-5 {
+            display: none;
+
+            @media (width >= 1600px) {
+                display: block;
+            }
+        }
+    }
+
+    h2 {
+        margin: 0;
+        text-align: right;
+        font-weight: 700;
+    }
+}

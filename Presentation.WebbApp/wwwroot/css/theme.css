@@ -3,9 +3,8 @@
     --font-default: "DM Sans", sans-serif;
     --font-heading: "Poppins", sans-serif;
     --font-fa: "Font Awesome";
-
     /* colors */
-    --theme-color: #d7eb31;
+    --theme-color: #d6eb31;
     --dark-color: #27252f;
     --gray-color: #6f6f6f;
     --light-gray-color: #cecece;
@@ -13,9 +12,8 @@
     --light-color: #f7f7f7;
     --white-color: #ffffff;
     --danger-color: #ce2b2baf;
-    
     /* elements */
-    
+
     --body-background-color: var(--light-color);
     --section-background-color: var(--white-color);
     --section-accent-background-color: var(--dark-color);
@@ -23,7 +21,9 @@
     --heading-accent-color: var(--white-color);
     --text-color: var(--dark-color);
     --text-accent-color: var(--white-color);
+    --section-title-background-color: var(--dark-color);
     --section-title-text-color: var(--white-color);
+    --section-title-dot-color: var(--theme-color);
     --border-color: var(--gray-color);
     --border-accent-color: var(--theme-color);
     --link-color: var(--dark-color);
@@ -54,6 +54,5 @@
     --input-error-text-color: var(--danger-color);
     --tooltip-background-color: var(--dark-color);
     --tooltip-text-color: var(--white-color);
-
     --brands-background-color: var(--theme-color);
 }

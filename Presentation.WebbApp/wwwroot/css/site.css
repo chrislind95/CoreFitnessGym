@@ -94,6 +94,53 @@ hr {
     }
 }
 
+.section-title {
+    display: inline-block;
+    background-color: var(--section-title-background-color);
+    color: var(--section-title-text-color);
+    padding: 0 1rem 0.25rem;
+    border-radius: 25px;
+    font-family: var(--font-default);
+    font-weight: 600;
+    font-size: 14px;
+
+    &::before {
+        content: "\e7d1";
+        color: var(--section-title-dot-color);
+        font-family: var(--font-fa);
+        font-weight: 900;
+        font-size: 1.5em;
+        position: relative;
+        top: 3px;
+        margin-right: 4px;
+    }
+}
+
+.quote {
+    display: block;
+    background-color: var(--quote-background-color);
+    color: var(--quote-text-color);
+    padding: 3rem 3rem;
+    border-radius: 20px;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1rem;
+    position: relative;
+    margin: 2rem 0;
+
+    &::after {
+        content: "\f10e";
+        font-family: var(--font-fa);
+        font-weight: 900;
+        font-size: 8em;
+        position: absolute;
+        top: 50%;
+        right: 5%;
+        transform: translateY(-50%);
+        opacity: 0.1;
+    }
+}
+
 .menu {
     display: flex;
     gap: 1.5rem;
@@ -696,5 +743,40 @@ header {
         margin: 0;
         text-align: right;
         font-weight: 700;
+    }
+}
+
+/* about-us section */
+.section__about-us {
+    text-align: center;
+    margin: 1.5rem 0;
+
+
+    @media (width >= 1200px) {
+        text-align: left;
+    }
+
+    .about-us-area {
+        display: flex;
+        gap: 2rem;
+
+        .about-us-image {
+            display: none;
+
+            @media (width >= 1200px) {
+                display: block;
+            }
+        }
+
+        .about-us-content {
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            @media (width >= 1200px) {
+                align-items: start;
+            }
+        }
     }
 }

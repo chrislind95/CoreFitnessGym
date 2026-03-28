@@ -1,6 +1,10 @@
+using Presentation.WebbApp.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<IFaqService, FaqService>();
 
 var app = builder.Build();
 

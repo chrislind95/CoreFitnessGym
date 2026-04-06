@@ -1,5 +1,70 @@
-﻿<partial name="Partials/Globals/_PageTitleSection" />
+﻿@{
+    ViewData["Title"] = "Customer Service";
+}
 
-<partial name="Partials/Sections/_ContactRequestSection" />
+<div class="page_customer-service">
+    <partial name="Partials/Globals/_PageTitleSection" />
+
+    <div class="container">
+        <partial name="Partials/Sections/_ContactRequestSection" />
+    </div>
+
+</div>
 
 <partial name="Partials/Sections/_FaqSection" />
+
+@section Scripts {
+    <partial name="Partials/Globals/_ValidationScripts" />
+
+    <script>
+        $(function() {
+            const form = $("#contact-form")
+            const checkbox = $("#AcceptSavePersonalInformation")
+            const checkboxValidation = $('[data-valmsg-for="AcceptSavePersonalInformation"]')
+
+            function setCheckboxError(message) {
+                checkbox.addClass("input-validation-error");
+                checkboxValidation
+                    .removeClass("field-validation-valid")
+                    .addClass("field-validation-error")
+                    .text(message);
+            }
+
+            function clearCheckboxError() {
+                checkbox.removeClass("input-validation-error");
+                checkboxValidation
+                    .removeClass("field-validation-error")
+                    .addClass("field-validation-valid")
+                    .text("");
+            }
+
+            function validateCheckbox() {
+                if (checkbox.is(":checked")) {
+                    clearCheckboxError();
+                    return true;
+                }
+
+                setCheckboxError("You must accept to save personal information");
+                return false;
+            }
+
+            checkbox.on("change", function () {
+                validateCheckbox();
+            });
+
+            form.on("submit", function (e) {
+                e.preventDefault();
+
+                const checkboxIsValid = validateCheckbox();
+
+                if (!checkboxIsValid) {
+                    return;
+                }
+
+                clearCheckboxError();
+
+                this.submit();
+            });
+        });
+    </script>
+}

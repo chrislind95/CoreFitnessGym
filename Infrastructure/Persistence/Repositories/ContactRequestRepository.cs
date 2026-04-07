@@ -11,7 +11,7 @@ public class ContactRequestRepository(PersistenceContext context) : IContactRequ
 {
     public async Task<bool> AddAsync(ContactRequestInput model)
     {
-        ArgumentNullException.ThrowIfNull(model);
+        ArgumentNullException.ThrowIfNull(model); //Kan bygga en egen exception som returnerar fel
 
         var entity = new ContactRequestEntity
         {

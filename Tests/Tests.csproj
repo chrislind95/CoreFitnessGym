@@ -24,4 +24,10 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="E2E\" />
+    <Folder Include="Integration\" />
+    <Folder Include="Unit\" />
+  </ItemGroup>
+
 </Project>

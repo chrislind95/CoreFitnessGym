@@ -9,10 +9,8 @@ public static class InfrastructureServiceCollectionExtensions
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration, IHostEnvironment environment)
     {
-        ArgumentNullException.ThrowIfNull(configuration);
-        ArgumentNullException.ThrowIfNull(environment);
-
         services.AddPersistence(configuration, environment);
+        services.AddIdentity(configuration);
 
         return services;
     }

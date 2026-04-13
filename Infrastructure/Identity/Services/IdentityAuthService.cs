@@ -7,36 +7,67 @@ namespace Infrastructure.Identity.Services;
 
 public class IdentityAuthService(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager) : IAuthService
 {
-    public Task<AuthResult> AlreadyExistsAsync(string email)
+    public async Task<AuthResult> UserExistsAsync(string email)
     {
-        throw new NotImplementedException();
+        if(string.IsNullOrWhiteSpace(email))
+            throw new ArgumentNullException(nameof(email));
+
+        var exists = await userManager.Users.AnyAsync(x =>  x.Email == email);
+        return exists ? AuthResult.AlreadyExists() : AuthResult.NotFound();
     }
 
-    public Task<AuthResult> SignUpUserAsync(string email, string password, string? roleName = null)
+    public async Task<AuthResult> CreateUserAsync(string email, string password, string? roleName = null)
     {
-        throw new NotImplementedException();
+        if(string.IsNullOrEmpty(email))
+            throw new ArgumentNullException(nameof(email));
+
+        if (string.IsNullOrEmpty(password))
+            throw new ArgumentNullException(nameof(password));
+
+        var exists = await UserExistsAsync(email);
+        if (exists.Succeeded)
+            return AuthResult.Failed("User with same email already exists");
+
+        var user = AppUser.Create(email, true);
+
+        var created = await userManager.CreateAsync(user, password);
+        if (created.Succeeded)
+        {
+            if (!string.IsNullOrWhiteSpace(roleName))
+            {
+                if(await roleManager.RoleExistsAsync(roleName))
+                await userManager.AddToRoleAsync(user, roleName);
+            }
+        }
+        
+        return created.Succeeded ? AuthResult.Ok() : AuthResult.Failed(created.Errors.FirstOrDefault()?.Description ?? "Unable to crate user");
     }
 
-    public async Task<AuthResult> SignInUserAsync(string email, string password, bool rememberMe = false)
+    public async Task<AuthResult> LoginUserAsync(string email, string password, bool rememberMe = false)
     {
-        if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
-            return AuthResult.InvalidCredentials();
+        if (string.IsNullOrEmpty(email))
+            throw new ArgumentNullException(nameof(email));
+
+        if (string.IsNullOrEmpty(password))
+            throw new ArgumentNullException(nameof(password));
+
+        var exists = await UserExistsAsync(email);
+        if (!exists.Succeeded)
+            return AuthResult.Failed("Incorrect email or password");
 
         var result = await signInManager.PasswordSignInAsync(email, password, rememberMe, false);
+
         if (result.IsLockedOut)
-            return AuthResult.LockedOut();
+            return AuthResult.Failed("User has been temporary locked out");
 
         if (result.IsNotAllowed)
-            return AuthResult.NotAllowed();
-
-        if (result.RequiresTwoFactor)
-            return AuthResult.RequireTwoFactorAuth();
+            return AuthResult.Failed("User is not allowed to sign in");
 
         if (!result.Succeeded)
-            return AuthResult.Failed();
+            return AuthResult.Failed("Incorrect email or password");
 
         return AuthResult.Ok();
     }
 
-    public Task SignOutUserAsync() => signInManager.SignOutAsync();
+    public Task LogoutUserAsync() => signInManager.SignOutAsync();
 }

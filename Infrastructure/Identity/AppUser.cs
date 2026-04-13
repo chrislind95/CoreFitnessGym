@@ -8,14 +8,16 @@ public class AppUser : IdentityUser
     public string? LastName { get; set; }
     public string? ImageUrl { get; set; }
 
-    public static AppUser Create(string email)
-    {
-        return new AppUser
+    public static AppUser Create(string email, bool emailConfirmed = false, string? firstName = null, string? lastName = null, string? ImageUrl = null)
+        => new()
         {
-            UserName = email.Trim().ToLowerInvariant(),
-            Email = email.Trim().ToLowerInvariant()
+            UserName = email,
+            Email = email,
+            FirstName = firstName,
+            LastName = lastName,
+            ImageUrl = ImageUrl,
+            EmailConfirmed = emailConfirmed,
         };
-    }
 
     public static AppUser UpdateDetails(AppUser user, string? firstName, string? lastName,  string? imageUrl, string? phoneNumber)
     {

@@ -1,6 +1,7 @@
 ﻿using Application.Abstractions.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.WebbApp.Areas.Authentication.Models;
+using Presentation.WebbApp.Services;
 
 namespace Presentation.WebbApp.Areas.Authentication.Controllers
 {
@@ -11,9 +12,9 @@ namespace Presentation.WebbApp.Areas.Authentication.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var redirect = RedirectWhenSignedIn;
-            if (redirect is not null)
-                return (redirect);
+            var redirectPath = AuthenticationRedirectService.GetRedirectPathWhenSignedIn(User);
+            if (redirectPath is not null)
+                return Redirect(redirectPath);
 
             return View();
         }
@@ -34,29 +35,11 @@ namespace Presentation.WebbApp.Areas.Authentication.Controllers
                 return View(form);
             }
 
-            var redirect = RedirectWhenSignedIn;
-            if(redirect is not null)
-                return (redirect);
+            var redirectPath = AuthenticationRedirectService.GetRedirectPathWhenSignedIn(User);
+            if(redirectPath is not null)
+                return Redirect(redirectPath);
 
             return Redirect("/");
-        }
-
-        private IActionResult? RedirectWhenSignedIn
-        {
-            get
-            {
-                if(User.Identity?.IsAuthenticated == true)
-                {
-                    if (User.IsInRole("Admin"))
-                        return Redirect("/admin");
-
-                    if (User.IsInRole("Member"))
-                        return Redirect("/me");
-
-                    return Redirect("/");
-                }
-                return null;
-            }
         }
     }
 }

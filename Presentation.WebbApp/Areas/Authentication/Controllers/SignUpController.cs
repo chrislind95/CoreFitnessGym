@@ -1,6 +1,7 @@
 ﻿using Application.Abstractions.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.WebbApp.Areas.Authentication.Models;
+using Presentation.WebbApp.Services;
 
 namespace Presentation.WebbApp.Areas.Authentication.Controllers
 {
@@ -11,6 +12,10 @@ namespace Presentation.WebbApp.Areas.Authentication.Controllers
         [HttpGet("sign-up")]
         public IActionResult SignUp()
         {
+            var redirectPath = AuthenticationRedirectService.GetRedirectPathWhenSignedIn(User);
+            if (redirectPath is not null)
+                return Redirect(redirectPath);
+
             return View();
         }
 

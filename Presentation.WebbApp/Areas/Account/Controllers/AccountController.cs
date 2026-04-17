@@ -1,5 +1,6 @@
 ﻿using Application.Abstractions.Identity;
 using Application.Dtos.Identity;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.WebbApp.Areas.Account.Models;
@@ -92,6 +93,31 @@ public class AccountController(IAuthService authService, IUserService userServic
 
         return Redirect("/");
     }
+
+    [HttpGet("account-deleted")]
+    [AllowAnonymous]
+    public IActionResult RemoveAccountConfirmed()
+    {
+        return View();
+    }
+
+    [HttpPost("remove-account")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> RemoveAccount()
+    {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        if (string.IsNullOrWhiteSpace(userId))
+            return RedirectToAction("Index", "Home");
+
+        await userService.DeleteUserAsync(userId);
+
+        await authService.LogoutUserAsync();
+
+        return RedirectToAction(nameof(RemoveAccountConfirmed));
+    }
+
+
     private static async Task<string> SaveProfileImageAsync(IFormFile file)
     {
         var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "profiles");
@@ -106,6 +132,4 @@ public class AccountController(IAuthService authService, IUserService userServic
 
         return $"/uploads/profiles/{fileName}";
     }
-
-
 }

@@ -6,9 +6,20 @@ namespace Infrastructure.Identity.Services;
 
 public class IdentityUserService(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager) : IUserService
 {
-    public Task DeleteUserAsync(string userId)
+    public async Task<UserResult> DeleteUserAsync(string userId)
     {
-        throw new NotImplementedException();
+        ArgumentNullException.ThrowIfNull(userId);
+
+        var user = await userManager.FindByIdAsync(userId);
+        if (user is null)
+            return UserResult.NotFound();
+
+        var result = await userManager.DeleteAsync(user);
+
+        return result.Succeeded
+            ? UserResult.Ok()
+            : UserResult.Failed(result.Errors.FirstOrDefault()?.Description ?? "Unable to delete user");
+
     }
 
     public async Task<UserResult> GetUserDetailsAsync(string userId)

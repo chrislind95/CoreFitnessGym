@@ -6,5 +6,5 @@ public interface IUserService
 {
     Task<UserResult> GetUserDetailsAsync(string userId);
     Task<UserResult> UpdateUserDetailsAsync(UserDetails userDetails);
-    Task DeleteUserAsync(string userId);
+    Task<UserResult> DeleteUserAsync(string userId);
 }

@@ -15,12 +15,48 @@
     <link rel="stylesheet" href="~/css/fonts.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/theme.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/admin-site.css" asp-append-version="true" />
 </head>
 <body>
     <div class="admin-layout">
         <header>
-            <partial name="Partials/Globals/_HeaderSection" />
+            <partial name="_AdminHeaderSection" />
         </header>
+                <aside>
+            <nav class="admin-menu options-menu">
+                <div class="options-menu-title">
+                    Options Menu
+                </div>
+                <ul class="options">
+                    <li class="option-title">Overview</li>
+                    <li class="option-item">
+                        <a class="option-item-link" asp-area="Admin" asp-controller="Admin" asp-action="Dashboard">Dashboard</a>
+                    </li>
+                    <li class="option-item">
+                        <a class="option-item-link" asp-area="Admin" asp-controller="Admin" asp-action="Messages">Messages</a>
+                    </li>
+                    <li class="option-item">
+                        <a class="option-item-link" asp-area="Admin" asp-controller="Admin" asp-action="Schedule">Schedule</a>
+                    </li>
+                 </ul>
+
+                <ul class="options">
+                    <li class="option-title">Management</li>
+                    <li class="option-item">
+                        <a class="option-item-link" asp-area="Admin" asp-controller="AdminEmployees" asp-action="Index">Employees</a>
+                    </li>
+                    <li class="option-item">
+                        <a class="option-item-link" asp-area="Admin" asp-controller="AdminMembers" asp-action="Index">Members</a>
+                    </li>
+                    <li class="option-item">
+                        <a class="option-item-link" asp-area="Admin" asp-controller="AdminMemberships" asp-action="Index">Memberships</a>
+                    </li>
+                    <li class="option-item">
+                        <a class="option-item-link" asp-area="Admin" asp-controller="AdminInvoices" asp-action="Index">Invoices</a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
         <main>
             @RenderBody()
         </main>

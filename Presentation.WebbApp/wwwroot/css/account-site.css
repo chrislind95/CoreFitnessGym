@@ -110,13 +110,13 @@
     }
 }
 
-.remove-account a {
-    color: var(--danger-color);
-    font-weight: 500;
-    text-decoration: none;
-    display: block;
-    padding: 0.8rem 1rem;
-    border-radius: 8px;
+.remove-account-link {
+    background-color: var(--danger-color);
+
+    &:hover {
+        background-color: var(--danger-color);
+        color: white;
+    }
 }
 
 .remove-account a:hover {
@@ -134,4 +134,20 @@
         display: flex;
         justify-content: flex-end;
     }
+}
+
+.section-account-removed {
+    width: 100%;
+}
+
+.section-account-removed {
+    position: relative;
+}
+
+.account-layout .container:has(.section-account-removed) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 60vh;
 }

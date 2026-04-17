@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Page Not Found";
+}
+
+<section class="section-not-found">
+    <div class="container">
+        <div class="not-found-wrapper">
+
+            <div class="not-found-image">
+                <img src="~/images/404-error-img.png" alt="Page not found" />
+            </div>
+
+            <div class="not-found-content">
+                <h1>Oops! page not found</h1>
+                <p>
+                    The page you are looking for doesn’t exist or has been moved.
+                </p>
+
+                <a asp-controller="Home" asp-action="Index" class="btn">
+                    Back to Home
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>

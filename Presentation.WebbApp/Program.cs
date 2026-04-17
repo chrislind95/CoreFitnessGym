@@ -20,6 +20,8 @@ app.UseHsts();
 app.UseHttpsRedirection();
 app.UseRouting();
 
+app.UseStatusCodePagesWithReExecute("/404");
+
 app.UseSession();
 app.UseAuthentication();
 app.UseAuthorization();

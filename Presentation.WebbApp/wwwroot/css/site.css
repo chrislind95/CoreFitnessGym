@@ -163,13 +163,6 @@ a {
     padding: 1rem;
 }
 
-/*.admin-layout {
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    height: 100dvh;
-    padding: 1rem;
-}*/
-
 .auth-layout {
     display: grid;
     grid-template-rows: auto 1fr;
@@ -1317,8 +1310,18 @@ header {
         align-items: center;
         height: 50px;
     }
-}
 
+    .form-group {
+        padding-bottom: 1rem;
+    }
+
+    .form-checkbox-label {
+        padding-top: 1rem;
+        text-align: center;
+    }
+
+
+}
 /* NotFound */
 
 .section-not-found {

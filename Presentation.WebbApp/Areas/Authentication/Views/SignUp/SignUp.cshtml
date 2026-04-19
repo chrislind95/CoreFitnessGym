@@ -22,10 +22,17 @@
 
         <button class="btn" type="submit">Continue</button>
 
-        <div data-type="terms" class="form-group form-checkbox-group">
-            <input class="form-input" asp-for="TermsAndConditions" />
-            <label class="form-label" asp-for="TermsAndConditions"></label>
-            <span class="form-field-validation" asp-validation-for="TermsAndConditions"></span>
+        <div data-type="terms" class="form-group checkbox">
+            <div class="form-checkbox-validation">
+                <label class="form-checkbox-label">
+                    <input class="form-checkbox-input" asp-for="TermsAndConditions" />
+                    <span class="form-checkbox-checkmark"></span>
+                    <span class="checkbox-label">
+                        @Html.DisplayNameFor(m => m.TermsAndConditions)
+                    </span>
+                </label>
+                <span class="field-field-validation" asp-validation-for="TermsAndConditions"></span>
+            </div>
         </div>
 
         <div class="form-errormessage">
